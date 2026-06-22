@@ -20,16 +20,16 @@ const ACHIEVEMENTS = [
 ];
 
 const MENU_CONFIG = [
-  { id: "shoyu", name: "醤油ラーメン", cost: 80, multiplier: 1.2, category: "基本メニュー", description: "定番の味。まずは看板メニューを増やします。" },
-  { id: "miso", name: "味噌ラーメン", cost: 220, multiplier: 1.6, category: "基本メニュー", description: "濃厚な味で客単価が上がります。" },
-  { id: "tonkotsu", name: "豚骨ラーメン", cost: 620, multiplier: 2.2, category: "基本メニュー", description: "人気の一杯。解放すると売上が大きく伸びます。" },
+  { id: "shoyu", name: "醤油ラーメン", cost: 80, multiplier: 1.2, category: "基本ラーメン", description: "定番の味。まずは看板メニューを増やします。" },
+  { id: "miso", name: "味噌ラーメン", cost: 220, multiplier: 1.6, category: "基本ラーメン", description: "濃厚な味で客単価が上がります。" },
+  { id: "tonkotsu", name: "豚骨ラーメン", cost: 620, multiplier: 2.25, category: "基本ラーメン", description: "人気の一杯。解放すると売上が大きく伸びます。" },
 
-  { id: "soup_shoyu", name: "醤油スープ", cost: 120, multiplier: 1.25, category: "スープ系", description: "香り高い醤油だれで安定した人気を狙います。" },
-  { id: "soup_shio", name: "塩スープ", cost: 180, multiplier: 1.35, category: "スープ系", description: "すっきりした味で幅広い客層に届きます。" },
-  { id: "soup_miso", name: "味噌スープ", cost: 280, multiplier: 1.55, category: "スープ系", description: "コクのある味で満足度を上げます。" },
-  { id: "soup_tonkotsu", name: "豚骨スープ", cost: 520, multiplier: 1.9, category: "スープ系", description: "濃厚なスープでリピーターを増やします。" },
-  { id: "soup_gyokai", name: "魚介スープ", cost: 760, multiplier: 2.25, category: "スープ系", description: "魚介の旨味で売上を押し上げます。" },
-  { id: "soup_toripaitan", name: "鶏白湯スープ", cost: 980, multiplier: 2.55, category: "スープ系", description: "まろやかな一杯で客単価が大きく伸びます。" },
+  { id: "soup_shoyu", name: "特製醤油ラーメン", cost: 120, multiplier: 1.3, category: "定番ラーメン", description: "香り高い醤油だれで安定した人気を狙います。" },
+  { id: "soup_shio", name: "塩ラーメン", cost: 180, multiplier: 1.45, category: "定番ラーメン", description: "すっきりした味で幅広い客層に届きます。" },
+  { id: "soup_miso", name: "辛味噌ラーメン", cost: 280, multiplier: 1.75, category: "定番ラーメン", description: "コクと辛みのある味で満足度を上げます。" },
+  { id: "soup_tonkotsu", name: "濃厚豚骨ラーメン", cost: 520, multiplier: 2.05, category: "定番ラーメン", description: "濃厚な一杯でリピーターを増やします。" },
+  { id: "soup_gyokai", name: "魚介ラーメン", cost: 760, multiplier: 2.45, category: "定番ラーメン", description: "魚介の旨味で売上を押し上げます。" },
+  { id: "soup_toripaitan", name: "鶏白湯ラーメン", cost: 980, multiplier: 2.7, category: "定番ラーメン", description: "まろやかな一杯で客単価が大きく伸びます。" },
 
   { id: "sapporo", name: "札幌ラーメン", cost: 1300, multiplier: 2.9, category: "ご当地ラーメン", description: "北海道の人気味噌系メニューです。" },
   { id: "hakodate", name: "函館ラーメン", cost: 1600, multiplier: 3.15, category: "ご当地ラーメン", description: "北海道のあっさり塩系メニューです。" },

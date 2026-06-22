@@ -80,26 +80,27 @@ button:disabled {
 
 .shop-icon {
   position: relative;
-  width: 42px;
-  height: 38px;
+  width: var(--shop-icon-width, 42px);
+  height: var(--shop-icon-height, 38px);
 }
 
 .shop-roof {
   position: absolute;
   top: 1px;
-  left: 2px;
-  width: 38px;
-  height: 14px;
+  left: 50%;
+  width: calc(var(--shop-icon-width, 42px) - 4px);
+  height: calc(var(--shop-icon-height, 38px) * 0.37);
   border-radius: 8px 8px 3px 3px;
   background: var(--accent);
+  transform: translateX(-50%);
 }
 
 .shop-body {
   position: absolute;
-  right: 5px;
+  right: calc(var(--shop-icon-width, 42px) * 0.12);
   bottom: 2px;
-  left: 5px;
-  height: 25px;
+  left: calc(var(--shop-icon-width, 42px) * 0.12);
+  height: calc(var(--shop-icon-height, 38px) * 0.66);
   border: 2px solid #b7642a;
   border-radius: 5px;
   background: #fff7e8;
@@ -108,11 +109,12 @@ button:disabled {
 .shop-door {
   position: absolute;
   bottom: 4px;
-  left: 17px;
-  width: 9px;
-  height: 15px;
+  left: 50%;
+  width: calc(var(--shop-icon-width, 42px) * 0.22);
+  height: calc(var(--shop-icon-height, 38px) * 0.39);
   border-radius: 4px 4px 0 0;
   background: #9b5a28;
+  transform: translateX(-50%);
 }
 
 .speaker-button {
@@ -1002,8 +1004,8 @@ h2 {
   }
 
   .shop-icon {
-    width: 36px;
-    height: 34px;
+    --shop-icon-width: 36px;
+    --shop-icon-height: 34px;
   }
 
   .speaker-button {
