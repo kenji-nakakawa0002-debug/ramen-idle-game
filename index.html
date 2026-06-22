@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>放置ラーメン屋</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game-shell">
+    <header class="hero">
+      <p class="eyebrow">小さなお店から名店へ</p>
+      <h1>放置ラーメン屋</h1>
+      <p class="lead">ラーメンを作って売上を伸ばし、設備とメニューを増やして来店客を集めましょう。</p>
+    </header>
+
+    <section class="status-grid" aria-label="店舗ステータス">
+      <div class="status-card">
+        <span class="status-label">所持金</span>
+        <strong id="money">0円</strong>
+      </div>
+      <div class="status-card">
+        <span class="status-label">自動売上</span>
+        <strong id="incomePerSecond">1円 / 秒</strong>
+      </div>
+      <div class="status-card">
+        <span class="status-label">設備レベル</span>
+        <strong id="equipmentLevel">Lv. 1</strong>
+      </div>
+      <div class="status-card">
+        <span class="status-label">売上倍率</span>
+        <strong id="multiplier">x1.0</strong>
+      </div>
+      <div class="status-card">
+        <span class="status-label">来店客</span>
+        <strong id="customerCount">1人</strong>
+      </div>
+    </section>
+
+    <section class="shop-panel" aria-label="店舗">
+      <div class="ramen-visual">
+        <div id="speechBubble" class="speech-bubble" aria-live="polite">いらっしゃいませ！</div>
+
+        <div class="shop-scene" aria-hidden="true">
+          <div id="customerStage" class="customer-stage"></div>
+          <div class="counter"></div>
+          <div class="bowl">
+            <div class="steam steam-one"></div>
+            <div class="steam steam-two"></div>
+            <div class="steam steam-three"></div>
+            <div class="soup">
+              <span class="noodle noodle-one"></span>
+              <span class="noodle noodle-two"></span>
+              <span class="topping egg"></span>
+              <span class="topping chashu"></span>
+              <span class="topping negi"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="makeRamenButton" class="primary-button" type="button">
+          ラーメンを作る
+        </button>
+
+        <div class="selected-menu-box">
+          <span class="selected-menu-label">販売中メニュー</span>
+          <strong id="selectedMenuName">屋台ラーメン</strong>
+          <span id="selectedMenuInfo">メニュー倍率 x1.0</span>
+        </div>
+
+        <div class="upgrade-box">
+          <div>
+            <p class="upgrade-title">設備強化</p>
+            <p id="upgradeInfo" class="upgrade-info">費用: 30円 / 次の倍率: x1.5</p>
+          </div>
+          <button id="upgradeButton" class="secondary-button" type="button">
+            強化する
+          </button>
+        </div>
+
+        <div class="customer-box">
+          <p class="customer-title">客数効果</p>
+          <p id="customerInfo" class="customer-info">客数が増えるほど、自動売上とラーメンの売上が上がります。</p>
+        </div>
+
+        <p id="message" class="message" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="menu-panel" aria-label="メニュー解放">
+      <div class="section-heading">
+        <p class="section-kicker">新メニュー解放</p>
+        <h2>売れる味を増やす</h2>
+      </div>
+      <div id="menuList" class="menu-list"></div>
+    </section>
+
+    <section class="save-panel" aria-label="セーブ操作">
+      <button id="saveButton" type="button">セーブ</button>
+      <button id="loadButton" type="button">ロード</button>
+      <button id="resetButton" class="danger-button" type="button">リセット</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
