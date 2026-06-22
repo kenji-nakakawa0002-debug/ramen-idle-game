@@ -27,7 +27,6 @@ body {
 }
 
 button {
-  width: 100%;
   border: 0;
   border-radius: 8px;
   padding: 14px 18px;
@@ -60,16 +59,82 @@ button:disabled {
 .game-shell {
   width: min(100%, 980px);
   margin: 0 auto;
-  padding: 28px 16px;
+  padding: 24px 12px;
 }
 
 .hero {
-  margin: 0 0 22px;
+  margin: 0 0 18px;
   text-align: center;
 }
 
+.title-row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, auto) 44px;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.shop-icon {
+  position: relative;
+  width: 42px;
+  height: 38px;
+}
+
+.shop-roof {
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  width: 38px;
+  height: 14px;
+  border-radius: 8px 8px 3px 3px;
+  background: var(--accent);
+}
+
+.shop-body {
+  position: absolute;
+  right: 5px;
+  bottom: 2px;
+  left: 5px;
+  height: 25px;
+  border: 2px solid #b7642a;
+  border-radius: 5px;
+  background: #fff7e8;
+}
+
+.shop-door {
+  position: absolute;
+  bottom: 4px;
+  left: 17px;
+  width: 9px;
+  height: 15px;
+  border-radius: 4px 4px 0 0;
+  background: #9b5a28;
+}
+
+.speaker-button {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  background: #fffaf2;
+  font-size: 1.25rem;
+}
+
+.speaker-button.is-playing {
+  border-color: var(--success);
+  background: #e7f7ee;
+  box-shadow: 0 0 0 4px rgba(27, 127, 77, 0.12);
+}
+
 .eyebrow {
-  margin: 0 0 8px;
+  margin: 8px 0 0;
   color: var(--accent-dark);
   font-size: 0.9rem;
   font-weight: 800;
@@ -82,7 +147,9 @@ h2 {
 }
 
 h1 {
-  font-size: clamp(2rem, 8vw, 4rem);
+  min-width: 0;
+  font-size: clamp(2rem, 7vw, 4rem);
+  overflow-wrap: anywhere;
 }
 
 h2 {
@@ -98,42 +165,15 @@ h2 {
 
 .status-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 12px;
   margin-bottom: 16px;
-}
-
-.audio-panel {
-  display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 12px;
-  align-items: center;
-  margin-bottom: 16px;
-  padding: 12px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: var(--shadow);
-}
-
-.audio-button {
-  color: #fff;
-  background: var(--accent-dark);
-}
-
-.audio-button.is-playing {
-  background: var(--success);
-}
-
-.audio-status {
-  margin: 0;
-  color: var(--muted);
-  font-weight: 800;
 }
 
 .status-card,
 .shop-panel,
 .menu-panel,
+.achievement-panel,
 .save-panel {
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -143,21 +183,26 @@ h2 {
 
 .status-card {
   min-width: 0;
-  padding: 16px;
+  padding: 14px;
 }
 
 .status-label {
   display: block;
   margin-bottom: 6px;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
 }
 
 .status-card strong {
   display: block;
   overflow-wrap: anywhere;
-  font-size: clamp(1.2rem, 3vw, 1.75rem);
+  font-size: clamp(1.08rem, 2.7vw, 1.55rem);
+}
+
+.rank-status-card strong {
+  color: var(--accent-dark);
+  font-size: clamp(1rem, 2.3vw, 1.35rem);
 }
 
 .shop-panel {
@@ -182,26 +227,25 @@ h2 {
 
 .speech-bubble {
   position: absolute;
-  top: 16px;
-  left: 50%;
-  z-index: 4;
-  max-width: min(84%, 280px);
+  top: 34px;
+  right: 20px;
+  z-index: 5;
+  max-width: min(70%, 240px);
   padding: 10px 14px;
   border: 2px solid #f2c794;
   border-radius: 999px;
   background: #fffdfa;
   color: var(--accent-dark);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 800;
   text-align: center;
   box-shadow: 0 8px 20px rgba(83, 43, 12, 0.12);
-  transform: translateX(-50%);
-  animation: bubbleFloat 2.6s ease-in-out infinite;
+  animation: bubbleFloatSide 2.6s ease-in-out infinite;
 }
 
 .speech-bubble::after {
   position: absolute;
-  right: 34px;
+  right: 26px;
   bottom: -8px;
   width: 14px;
   height: 14px;
@@ -213,7 +257,7 @@ h2 {
 }
 
 .speech-bubble.bubble-pop {
-  animation: bubblePop 0.34s ease, bubbleFloat 2.6s ease-in-out 0.34s infinite;
+  animation: bubblePopSide 0.34s ease, bubbleFloatSide 2.6s ease-in-out 0.34s infinite;
 }
 
 .shop-scene {
@@ -222,21 +266,38 @@ h2 {
   min-height: 230px;
 }
 
-.customer-stage {
+.customer-stage,
+.entry-customer-layer {
   position: absolute;
   inset: 48px 0 auto;
   height: 96px;
 }
 
-.customer {
+.entry-customer-layer {
+  z-index: 2;
+  pointer-events: none;
+}
+
+.customer,
+.entry-customer {
   position: absolute;
   bottom: 0;
   width: 42px;
   height: 72px;
+}
+
+.customer {
   animation: customerBob 1.8s ease-in-out infinite;
 }
 
-.customer::before {
+.entry-customer {
+  left: -44px;
+  opacity: 0;
+  animation: enterShop 1.25s ease-out forwards;
+}
+
+.customer::before,
+.entry-customer::before {
   position: absolute;
   top: 0;
   left: 8px;
@@ -248,7 +309,8 @@ h2 {
   content: "";
 }
 
-.customer::after {
+.customer::after,
+.entry-customer::after {
   position: absolute;
   bottom: 0;
   left: 3px;
@@ -418,11 +480,18 @@ h2 {
   gap: 14px;
 }
 
+.primary-button,
+.secondary-button,
+.menu-button,
+.save-panel button {
+  width: 100%;
+}
+
 .primary-button {
   min-height: 72px;
   color: #fff;
   background: linear-gradient(180deg, #f05a28, var(--accent));
-  font-size: 1.2rem;
+  font-size: 1.16rem;
 }
 
 .primary-button.cooking {
@@ -450,14 +519,20 @@ h2 {
   background: var(--accent-soft);
 }
 
-.customer-box,
-.selected-menu-box {
+.customer-box {
   background: #fffaf2;
 }
 
 .selected-menu-box {
   display: grid;
   gap: 4px;
+  width: 100%;
+  text-align: left;
+  background: #fffaf2;
+}
+
+.selected-menu-box:hover {
+  background: #fff1e7;
 }
 
 .selected-menu-label,
@@ -471,9 +546,14 @@ h2 {
   font-size: 1.3rem;
 }
 
-.selected-menu-box span:last-child {
+.selected-menu-box span:nth-child(3) {
   color: var(--accent-dark);
   font-weight: 800;
+}
+
+.selected-menu-hint {
+  color: var(--muted);
+  font-size: 0.82rem;
 }
 
 .upgrade-title,
@@ -502,7 +582,8 @@ h2 {
   font-weight: 700;
 }
 
-.menu-panel {
+.menu-panel,
+.achievement-panel {
   margin-top: 16px;
   padding: 20px;
 }
@@ -528,7 +609,7 @@ h2 {
 
 .menu-card {
   display: grid;
-  gap: 12px;
+  gap: 10px;
   min-width: 0;
   padding: 16px;
   border: 1px solid var(--line);
@@ -555,7 +636,7 @@ h2 {
 
 .menu-name {
   margin: 0;
-  font-size: 1.08rem;
+  font-size: 1.02rem;
   font-weight: 900;
 }
 
@@ -565,10 +646,11 @@ h2 {
   border-radius: 999px;
   color: #fff;
   background: var(--accent-dark);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 800;
 }
 
+.menu-category,
 .menu-description,
 .menu-cost {
   margin: 0;
@@ -576,6 +658,7 @@ h2 {
   line-height: 1.45;
 }
 
+.menu-category,
 .menu-cost {
   font-weight: 800;
 }
@@ -587,6 +670,49 @@ h2 {
 .menu-button.is-selected {
   color: #fff;
   background: var(--success);
+}
+
+.achievement-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.achievement-card {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fffdf8;
+}
+
+.achievement-card.is-unlocked {
+  border-color: #d8a526;
+  background: #fff8d8;
+  box-shadow: inset 0 0 0 2px rgba(216, 165, 38, 0.16);
+}
+
+.achievement-title,
+.achievement-detail,
+.achievement-status {
+  margin: 0;
+}
+
+.achievement-title {
+  font-weight: 900;
+}
+
+.achievement-detail {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.achievement-status {
+  color: var(--accent-dark);
+  font-size: 0.86rem;
+  font-weight: 800;
 }
 
 .save-panel {
@@ -602,28 +728,158 @@ h2 {
   background: var(--danger);
 }
 
-@keyframes bubbleFloat {
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: none;
+  padding: 18px;
+}
+
+.modal.is-open {
+  display: grid;
+  place-items: center;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(42, 33, 24, 0.38);
+}
+
+.modal-panel {
+  position: relative;
+  z-index: 1;
+  width: min(720px, 100%);
+  max-height: min(720px, calc(100vh - 36px));
+  overflow: auto;
+  padding: 18px;
+  border-radius: 8px;
+  background: #fffaf2;
+  box-shadow: 0 24px 60px rgba(42, 33, 24, 0.28);
+}
+
+.modal-heading {
+  display: flex;
+  gap: 12px;
+  align-items: start;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.icon-close-button {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  font-size: 1.5rem;
+}
+
+.selectable-menu-list {
+  display: grid;
+  gap: 10px;
+}
+
+.selectable-menu-button {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fffdf8;
+  text-align: left;
+}
+
+.selectable-menu-button.is-selected {
+  color: #fff;
+  background: var(--success);
+}
+
+.selectable-menu-button span {
+  color: inherit;
+  opacity: 0.85;
+}
+
+.achievement-popup,
+.rank-up-popup {
+  position: fixed;
+  right: 18px;
+  z-index: 20;
+  display: grid;
+  gap: 4px;
+  width: min(340px, calc(100vw - 32px));
+  padding: 16px 18px;
+  border-radius: 8px;
+  color: var(--text);
+  box-shadow: 0 18px 40px rgba(90, 49, 18, 0.24);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.achievement-popup {
+  bottom: 18px;
+  border: 2px solid #d8a526;
+  background: #fff8d8;
+  transform: translateY(16px);
+}
+
+.rank-up-popup {
+  top: 18px;
+  border: 2px solid var(--accent);
+  background: #fff1e7;
+  transform: translateY(-16px);
+}
+
+.achievement-popup.is-visible {
+  animation: achievementPopup 3.2s ease forwards;
+}
+
+.rank-up-popup.is-visible {
+  animation: rankUpPopup 3.4s ease forwards;
+}
+
+.achievement-popup-label,
+.rank-up-popup-label {
+  color: var(--accent-dark);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.achievement-popup strong,
+.rank-up-popup strong {
+  font-size: 1.22rem;
+}
+
+.achievement-popup span:last-child,
+.rank-up-popup span:last-child {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+@keyframes bubbleFloatSide {
   0%,
   100% {
-    transform: translate(-50%, 0);
+    transform: translate(0, 0);
   }
 
   50% {
-    transform: translate(-50%, -5px);
+    transform: translate(-4px, -4px);
   }
 }
 
-@keyframes bubblePop {
+@keyframes bubblePopSide {
   0% {
-    transform: translate(-50%, 0) scale(0.94);
+    transform: scale(0.94);
   }
 
   65% {
-    transform: translate(-50%, -3px) scale(1.04);
+    transform: translate(-3px, -2px) scale(1.04);
   }
 
   100% {
-    transform: translate(-50%, 0) scale(1);
+    transform: scale(1);
   }
 }
 
@@ -635,6 +891,22 @@ h2 {
 
   50% {
     transform: translateY(-5px);
+  }
+}
+
+@keyframes enterShop {
+  0% {
+    opacity: 0;
+    transform: translate(-12px, 6px) scale(0.88);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(140px, 0) scale(0.78);
   }
 }
 
@@ -679,13 +951,65 @@ h2 {
   }
 }
 
+@keyframes achievementPopup {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+
+  12%,
+  82% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+}
+
+@keyframes rankUpPopup {
+  0% {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.98);
+  }
+
+  12%,
+  82% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+}
+
 @media (max-width: 720px) {
   .game-shell {
-    padding: 18px 12px;
+    padding: 16px 10px;
   }
 
   .hero {
-    margin-bottom: 16px;
+    margin-bottom: 14px;
+  }
+
+  .title-row {
+    grid-template-columns: 38px minmax(0, auto) 38px;
+    gap: 8px;
+  }
+
+  .shop-icon {
+    width: 36px;
+    height: 34px;
+  }
+
+  .speaker-button {
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
   }
 
   .lead {
@@ -693,16 +1017,12 @@ h2 {
   }
 
   .status-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
 
   .status-card {
-    padding: 13px;
-  }
-
-  .audio-panel {
-    grid-template-columns: 1fr;
+    padding: 12px;
   }
 
   .shop-panel {
@@ -712,11 +1032,25 @@ h2 {
   }
 
   .ramen-visual {
-    min-height: 280px;
+    min-height: 278px;
+  }
+
+  .speech-bubble {
+    top: 16px;
+    right: 10px;
+    max-width: 58%;
+    padding: 8px 11px;
+    font-size: 0.86rem;
+  }
+
+  .shop-scene {
+    width: min(84vw, 310px);
+    min-height: 228px;
   }
 
   .upgrade-box,
-  .menu-list {
+  .menu-list,
+  .achievement-list {
     grid-template-columns: 1fr;
   }
 
@@ -732,8 +1066,8 @@ h2 {
     position: sticky;
     bottom: 0;
     z-index: 8;
-    margin-right: -12px;
-    margin-left: -12px;
+    margin-right: -10px;
+    margin-left: -10px;
     border-right: 0;
     border-bottom: 0;
     border-left: 0;
@@ -744,15 +1078,15 @@ h2 {
 
 @media (max-width: 420px) {
   h1 {
-    font-size: 2.25rem;
+    font-size: 2rem;
   }
 
-  .status-grid {
-    grid-template-columns: 1fr 1fr;
+  .eyebrow {
+    font-size: 0.84rem;
   }
 
   .status-card strong {
-    font-size: 1.12rem;
+    font-size: 1.08rem;
   }
 
   .ramen-visual {
@@ -761,22 +1095,37 @@ h2 {
 
   .speech-bubble {
     top: 12px;
-    font-size: 0.88rem;
+    right: 8px;
+    max-width: 56%;
+    border-radius: 14px;
   }
 
-  .customer {
+  .speech-bubble::after {
+    right: 22px;
+  }
+
+  .customer,
+  .entry-customer {
     width: 36px;
     height: 62px;
   }
 
-  .menu-panel {
+  .menu-panel,
+  .achievement-panel {
     padding: 14px;
   }
 
   .save-panel {
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
-    padding: 10px 12px;
+    padding: 10px;
+  }
+
+  .rank-up-popup,
+  .achievement-popup {
+    right: 12px;
+    left: 12px;
+    width: auto;
   }
 
   button {

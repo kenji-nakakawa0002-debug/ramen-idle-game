@@ -9,17 +9,20 @@
 <body>
   <main class="game-shell">
     <header class="hero">
+      <div class="title-row">
+        <div class="shop-icon" aria-hidden="true">
+          <span class="shop-roof"></span>
+          <span class="shop-body"></span>
+          <span class="shop-door"></span>
+        </div>
+        <h1>放置ラーメン屋</h1>
+        <button id="bgmToggleButton" class="speaker-button" type="button" aria-label="BGMを再生" aria-pressed="false">
+          <span id="speakerIcon" aria-hidden="true">🔇</span>
+        </button>
+      </div>
       <p class="eyebrow">小さなお店から名店へ</p>
-      <h1>放置ラーメン屋</h1>
       <p class="lead">ラーメンを作って売上を伸ばし、設備とメニューを増やして来店客を集めましょう。</p>
     </header>
-
-    <section class="audio-panel" aria-label="BGM操作">
-      <button id="bgmToggleButton" class="audio-button" type="button" aria-pressed="false">
-        BGMを再生
-      </button>
-      <p id="bgmStatus" class="audio-status">BGM: 停止中</p>
-    </section>
 
     <section class="status-grid" aria-label="店舗ステータス">
       <div class="status-card">
@@ -42,6 +45,10 @@
         <span class="status-label">来店客</span>
         <strong id="customerCount">1人</strong>
       </div>
+      <div class="status-card rank-status-card">
+        <span class="status-label">現在の店舗ランク</span>
+        <strong id="shopRank">屋台 ★</strong>
+      </div>
     </section>
 
     <section class="shop-panel" aria-label="店舗">
@@ -50,6 +57,7 @@
 
         <div class="shop-scene" aria-hidden="true">
           <div id="customerStage" class="customer-stage"></div>
+          <div id="entryCustomerLayer" class="entry-customer-layer"></div>
           <div class="counter"></div>
           <div class="bowl">
             <div class="steam steam-one"></div>
@@ -71,16 +79,17 @@
           ラーメンを作る
         </button>
 
-        <div class="selected-menu-box">
+        <button id="selectedMenuBox" class="selected-menu-box" type="button">
           <span class="selected-menu-label">販売中メニュー</span>
           <strong id="selectedMenuName">屋台ラーメン</strong>
           <span id="selectedMenuInfo">メニュー倍率 x1.0</span>
-        </div>
+          <span class="selected-menu-hint">クリックして変更</span>
+        </button>
 
         <div class="upgrade-box">
           <div>
             <p class="upgrade-title">設備強化</p>
-            <p id="upgradeInfo" class="upgrade-info">費用: 30円 / 次の倍率: x1.5</p>
+            <p id="upgradeInfo" class="upgrade-info">費用: 30円 / 次の設備倍率: x1.5</p>
           </div>
           <button id="upgradeButton" class="secondary-button" type="button">
             強化する
@@ -104,12 +113,46 @@
       <div id="menuList" class="menu-list"></div>
     </section>
 
+    <section class="achievement-panel" aria-label="実績">
+      <div class="section-heading">
+        <p class="section-kicker">実績</p>
+        <h2>お店の記録</h2>
+      </div>
+      <div id="achievementList" class="achievement-list"></div>
+    </section>
+
     <section class="save-panel" aria-label="セーブ操作">
       <button id="saveButton" type="button">セーブ</button>
       <button id="loadButton" type="button">ロード</button>
       <button id="resetButton" class="danger-button" type="button">リセット</button>
     </section>
   </main>
+
+  <div id="menuModal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-menu-modal></div>
+    <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="menuModalTitle">
+      <div class="modal-heading">
+        <div>
+          <p class="section-kicker">販売メニュー選択</p>
+          <h2 id="menuModalTitle">解放済みメニュー</h2>
+        </div>
+        <button id="closeMenuModalButton" class="icon-close-button" type="button" aria-label="閉じる">×</button>
+      </div>
+      <div id="selectableMenuList" class="selectable-menu-list"></div>
+    </section>
+  </div>
+
+  <div id="achievementPopup" class="achievement-popup" role="status" aria-live="polite" aria-hidden="true">
+    <span class="achievement-popup-label">実績達成</span>
+    <strong id="achievementPopupTitle">初めての一杯</strong>
+    <span id="achievementPopupDetail">10杯を達成しました</span>
+  </div>
+
+  <div id="rankUpPopup" class="rank-up-popup" role="status" aria-live="polite" aria-hidden="true">
+    <span class="rank-up-popup-label">🎉 店舗ランクアップ！</span>
+    <strong id="rankUpPopupTitle">個人店 → 人気店</strong>
+    <span id="rankUpPopupDetail">お店の評判が上がりました</span>
+  </div>
 
   <audio id="bgmAudio" src="放置ラーメン屋用BGM.mp3" preload="auto" loop></audio>
   <script src="script.js"></script>
