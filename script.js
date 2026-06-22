@@ -1,4 +1,5 @@
 const SAVE_KEY = "idleRamenShopSave";
+const BGM_KEY = "idleRamenShopBgmEnabled";
 const MAX_VISIBLE_CUSTOMERS = 5;
 const BASE_MENU_ID = "base";
 
@@ -67,6 +68,9 @@ const messageElement = document.getElementById("message");
 const speechBubbleElement = document.getElementById("speechBubble");
 const customerStageElement = document.getElementById("customerStage");
 const menuListElement = document.getElementById("menuList");
+const bgmAudio = document.getElementById("bgmAudio");
+const bgmToggleButton = document.getElementById("bgmToggleButton");
+const bgmStatusElement = document.getElementById("bgmStatus");
 const makeRamenButton = document.getElementById("makeRamenButton");
 const upgradeButton = document.getElementById("upgradeButton");
 const saveButton = document.getElementById("saveButton");
@@ -122,6 +126,45 @@ function getUpgradeCost() {
 
 function formatYen(value) {
   return `${Math.floor(value).toLocaleString("ja-JP")}円`;
+}
+
+function isBgmEnabled() {
+  return localStorage.getItem(BGM_KEY) === "true";
+}
+
+function updateBgmDisplay(isPlaying) {
+  bgmToggleButton.textContent = isPlaying ? "BGMを停止" : "BGMを再生";
+  bgmToggleButton.setAttribute("aria-pressed", String(isPlaying));
+  bgmToggleButton.classList.toggle("is-playing", isPlaying);
+  bgmStatusElement.textContent = isPlaying ? "BGM: 再生中" : "BGM: 停止中";
+}
+
+async function playBgm() {
+  try {
+    bgmAudio.volume = 0.35;
+    bgmAudio.loop = true;
+    await bgmAudio.play();
+    localStorage.setItem(BGM_KEY, "true");
+    updateBgmDisplay(true);
+  } catch (error) {
+    localStorage.setItem(BGM_KEY, "false");
+    updateBgmDisplay(false);
+    showMessage("BGMはボタン操作後に再生できます");
+  }
+}
+
+function stopBgm() {
+  bgmAudio.pause();
+  localStorage.setItem(BGM_KEY, "false");
+  updateBgmDisplay(false);
+}
+
+function toggleBgm() {
+  if (bgmAudio.paused) {
+    playBgm();
+  } else {
+    stopBgm();
+  }
 }
 
 function showMessage(text) {
@@ -387,6 +430,17 @@ menuListElement.addEventListener("click", (event) => {
 saveButton.addEventListener("click", () => saveGame(true));
 loadButton.addEventListener("click", () => loadGame(true));
 resetButton.addEventListener("click", resetGame);
+bgmToggleButton.addEventListener("click", toggleBgm);
+
+document.addEventListener("pointerdown", (event) => {
+  if (event.target.closest("#bgmToggleButton")) {
+    return;
+  }
+
+  if (isBgmEnabled() && bgmAudio.paused) {
+    playBgm();
+  }
+}, { once: true });
 
 setInterval(() => {
   state.money += getIncomePerSecond();
@@ -403,4 +457,5 @@ setInterval(() => {
 }, 10000);
 
 loadGame(false);
+updateBgmDisplay(false);
 render();

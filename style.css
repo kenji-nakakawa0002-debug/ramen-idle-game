@@ -103,6 +103,34 @@ h2 {
   margin-bottom: 16px;
 }
 
+.audio-panel {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: var(--shadow);
+}
+
+.audio-button {
+  color: #fff;
+  background: var(--accent-dark);
+}
+
+.audio-button.is-playing {
+  background: var(--success);
+}
+
+.audio-status {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 800;
+}
+
 .status-card,
 .shop-panel,
 .menu-panel,
@@ -671,6 +699,10 @@ h2 {
 
   .status-card {
     padding: 13px;
+  }
+
+  .audio-panel {
+    grid-template-columns: 1fr;
   }
 
   .shop-panel {
